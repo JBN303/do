@@ -1,0 +1,227 @@
+body{
+    background-image: url("C:\project\prjt\project\src\img\v870-tang-36.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    height: 100%;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+  }
+  
+.full-height {
+    background: rgba(26, 26, 26, 0.548);
+    background-attachment: fixed;
+    max-height: 100vh;
+    height: 100vh;
+
+
+}
+table{
+    align-items: center;
+    width: 100%;
+    padding-top: 5px;
+    
+}
+.heading-text{
+    color: white;
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 63px;
+    margin-top: 15%;
+    text-align: center;
+    margin-bottom: 0;
+}
+
+.sub-text2{
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 17px;
+    line-height: 27px;
+    font-weight: 400;
+    text-align: center;
+    margin-top: 0;
+}
+
+
+.register-btn{
+    background-color: rgba(240, 248, 255, 0.589);
+    color: #77d5cb;
+}
+
+
+.edoc-logo{
+    color: white;
+    font-weight: bolder;
+    font-size: 25px;
+    padding-left:0%;
+    animation: transitionIn-Y-over 0.5s;
+}
+
+.edoc-logo-sub{
+    color: rgba(255, 255, 255, 0.733);
+    font-size: 12px;
+
+}
+
+
+.nav-item{
+    color: rgba(255, 255, 255, 0.671);
+    text-align: center;
+    font-size: 15px;
+    font-weight: 500;
+    animation: transitionIn-Y-over 0.5s;
+}
+
+.nav-item:hover{
+    color: #f0f0f0;
+
+}
+
+.footer-hashen{
+    position: absolute;
+    bottom: 0;
+    left: 45%;
+    font-size: 13px;
+    animation: transitionIn-Y-over 0.5s;
+}
+
+
+
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+  }
+  :root {
+    --accent-color: #fff;
+    --gradient-color: #FBFBFB;
+  }
+
+  .sidebar{
+    position: fixed;
+    width: 240px;
+    left: -240px;
+    height: 100%;
+    background-color: #fff;
+    transition: all .5s ease;
+  }
+  .sidebar header{
+    font-size: 28px;
+    color: #353535;
+    line-height: 70px;
+    text-align: center;
+    background-color: #fff;
+    user-select: none;
+    font-family: 'Lato', sans-serif;
+  }
+  .sidebar a{
+    display: block;
+    height: 65px;
+    width: 100%;
+    color: #353535;
+    line-height: 65px;
+    padding-left: 30px;
+    box-sizing: border-box;
+    border-left: 5px solid transparent;
+    font-family: 'Lato', sans-serif;
+    transition: all .5s ease;
+  }
+  a.active,a:hover{
+    border-left: 5px solid var(--accent-color);
+    color: #fff;
+     background: linear-gradient(to left, var(--accent-color), var(--gradient-color));
+  }
+  .sidebar a i{
+    font-size: 23px;
+    margin-right: 16px;
+  }
+  .sidebar a span{
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  #check{
+    display: none;
+  }
+
+  label #cancel{
+    opacity: 0;
+    visibility: hidden;
+  }
+  #check:checked ~ .sidebar{
+    left: 0;
+  }
+  #check:checked ~ label #btn{
+    margin-left: 245px;
+    opacity: 0;
+    visibility: hidden;
+  }
+  #check:checked ~ label #cancel{
+    margin-left: px;
+    opacity: 1;
+    visibility: visible;
+  }
+  @media(max-width : 860px){
+    .sidebar{
+      height: auto;
+      width: 70px;
+      left: 0;
+      margin: 100px 0;
+    }
+    header,#btn,#cancel{
+      display: none;
+    }
+    span{
+      position: absolute;
+      margin-left: 23px;
+      opacity: 0;
+      visibility: hidden;
+    }
+    .sidebar a{
+      height: 60px;
+    }
+    .sidebar a i{
+      margin-left: -10px;
+    }
+    a:hover {
+      width: 200px;
+      background: inherit;
+    }
+    .sidebar a:hover span{
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+  
+  .sidebar > a.active,.sidebar > a:hover:nth-child(even) {
+    --accent-color: #52d6f4;
+    --gradient-color: #bce9e2;
+  }
+  .sidebar a.active,.sidebar > a:hover:nth-child(odd) {
+    --accent-color: #52d6f4;
+    --gradient-color: #bce9e2;
+  }
+  
+  
+  .frame {
+    width: 50%;
+    height: 30%;
+    margin: auto;
+    text-align: center;
+  }
+  
+  HGFDG {
+    position: relative;
+    text-align: center;
+    color: #353535;
+    font-size: 60px;
+    font-family: 'Lato', sans-serif;
+    margin: 0;
+    color: #000000;
+  }
+  
+ 
+  
+  
+  
