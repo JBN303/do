@@ -1,66 +1,79 @@
-import React from 'react';
-import './index.css';
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Drawer from '@mui/material/Drawer';
+import AppBar from '@mui/material/AppBar';
+import CssBaseline from '@mui/material/CssBaseline';
+import Toolbar from '@mui/material/Toolbar';
+import List from '@mui/material/List';
+import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import MailIcon from '@mui/icons-material/Mail';
 
+const drawerWidth = 240;
 
-function Interfac() {
+export default function AdminDashboard() {
   return (
-    <>
-      <head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Lato&display=swap"
-          rel="stylesheet"
-        />
-        <link
-          href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
-          rel="stylesheet"
-        />
-      </head>
-
-      <body>
-        <input type="checkbox" id="check" />
-        <label htmlFor="check">
-          <i className="fas fa-bars" id="btn"></i>
-          <i className="fas fa-times" id="cancel"></i>
-        </label>
-
-        <div className="sidebar">
-          <header>Menu</header>
-          <a href="#" className="active">
-            <i className="fas fa-qrcode"></i>
-            <span>Dashboard</span>
-          </a>
-          <a href="doctorview">
-            <i className="fas fa-link"></i>
-            <span>DOCTORSLIST</span>
-          </a>
-          <a href="pview">
-            <i className="fas fa-stream"></i>
-            <span>PATIENT LIST</span>
-          </a>
-          <a href="#">
-            <i className="fas fa-calendar"></i>
-            <span>APPOINTMENTS</span>
-          </a>
-          <a href="#">
-            <i className="far fa-question-circle"></i>
-            <span>About</span>
-          </a>
-          <a href="#">
-            <i className="fas fa-sliders-h"></i>
-            <span>Services</span>
-          </a>
-          <a href="#">
-            <i className="far fa-envelope"></i>
-            <span>Contact</span>
-          </a>
-        </div>
-
-        <div className="full-height">
-       
-      </div>
-      </body>
-    </>
-);
-};
-
-export default Interfac;
+    <Box sx={{ display: 'flex' , backgroundColor: '#fff', minHeight: '100vh'}}>
+      <CssBaseline />
+      <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+        <Toolbar>
+          <Typography variant="h6" noWrap component="div">
+            Admin Dashboard
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <Drawer
+        variant="permanent"
+        sx={{
+          width: drawerWidth,
+          flexShrink: 0,
+          [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box' },
+        }}
+      >
+        <Toolbar />
+        <Box sx={{ overflow: 'auto' }}>
+          <List>
+            {[
+              { text: 'Dashboard', icon: <InboxIcon /> },
+              { text: 'Doctors List', icon: <MailIcon />, link: 'doctorview' },
+              { text: 'Patient List', icon: <InboxIcon />, link: 'pview' },
+              { text: 'Appointments', icon: <MailIcon /> },
+              { text: 'About', icon: <InboxIcon /> },
+              { text: 'Services', icon: <MailIcon /> },
+              { text: 'Contact', icon: <InboxIcon /> },
+            ].map(({ text, icon, link }, index) => (
+              <ListItem key={text} disablePadding button component="a" href={link || '#'}>
+                <ListItemButton>
+                  <ListItemIcon>{icon}</ListItemIcon>
+                  <ListItemText primary={text} />
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
+          <Divider />
+          <List>
+            {['All mail', 'Trash', 'Spam'].map((text, index) => (
+              <ListItem key={text} disablePadding>
+                <ListItemButton>
+                  <ListItemIcon>
+                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  </ListItemIcon>
+                  <ListItemText primary={text} />
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
+        </Box>
+      </Drawer>
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+        <Toolbar />
+        {/* Your main content goes here */}
+      </Box>
+    </Box>
+  );
+}

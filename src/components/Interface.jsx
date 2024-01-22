@@ -4,6 +4,7 @@ import './main.css';
 import './index.css';
 import './nav.css';
 import logo1 from '../img/logo.png'
+import logo from '../img/docere.png'
 
 function Interface() {
   return (
@@ -15,7 +16,7 @@ function Interface() {
               <td width="80%">
                 {/* <span className="edoc-logo">Docere </span>
                 <span className="edoc-logo-sub">| companion</span> */}
-                <img src={logo1} height={100} width={120}></img>
+               <img src={logo} alt="Logo" style={{ width: '150px', height: '140px' }} />
               </td>
               {/* <td width="10%">
                 <a href="Loginnav" className="non-style-link"><p className="nav-item">LOGIN</p></a>

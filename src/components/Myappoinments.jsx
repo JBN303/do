@@ -1,8 +1,4 @@
 import React from 'react';
-import './animations.css';
-import './main.css';
-import './index.css';
-import './nav.css';
 
 function Myappoinments() {
   return (

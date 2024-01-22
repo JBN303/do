@@ -1,278 +1,333 @@
 import React, { useState } from 'react';
-
-import './animations.css';
-import './main.css';
-import './signup.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import {
+  ThemeProvider,
+  createTheme,
+  CssBaseline,
+  Typography,
+  TextField,
+  Button,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
+  InputAdornment,
+  IconButton,
+  Paper,
+  TextareaAutosize,
+  Grid,
+} from '@mui/material';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 
-
-
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#77d5cb',
+    },
+  },
+});
 
 function SignUp() {
+  const [inputs, setInputs] = useState({
+    uid: '',
+    name: '',
+    age: '',
+    spec: '',
+    edu: '',
+    exp: '',
+    lang: '',
+    locat: '',
+    conslt: '',
+    type: 'online',
+    cert: '',
+    pic: '',
+    about: '',
+    phn: '',
+    email: '',
+    cpass: '',
+  });
 
-  var [inputs,setInputs] = useState({
-    "uid":'',
-    "name":'',
-    "age":'',
-    "spec":'',
-    "edu":'',
-    "exp":'',
-    "lang":'',
-    "locat":'',
-    "conslt":'',
-    "type":'',
-    "cert":'',
-    "pic":'',
-    "about":'',
-    "phn":'',
-    "email":'',
-    "cpass":'',
-
-    })
-
-   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   const InputHandler = (event) => {
-    const {name,value} = event.target
-    setInputs((inputs) => ({...inputs,[name]:value}))
-    console.log(inputs)
-  }
+    const { name, value } = event.target;
+    setInputs((inputs) => ({ ...inputs, [name]: value }));
+  };
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
 
   const SaveData = () => {
-    axios.post("http://localhost:5007/api/dnew", inputs) //axios.post("http://localhost:4007/dnew", inputs)
+    axios
+      .post('http://localhost:5007/api/dnew', inputs)
       .then((response) => {
-        alert("Record Saved successfully");
+        alert('Record Saved successfully');
         navigate('/login');
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   };
-  
 
   return (
-    <center>
-    <div className="container" style={{ animation: 'transitionIn-X 0.5s' }} >
-      
-      
-      <table border="0" className="table">
-        <tbody>
-        <tr>
-            <td colSpan="2">
-              <p className="header-text">Let's Get Started</p>
-              <p className="sub-text">It's Okey, Now Create doctor's Account.</p>
-            </td>
-          </tr>
-          <tr>
-            <td className="label-td" colSpan="2">
-              <label  className="form-label">NMC UID: </label>
-            </td>
-          </tr>
-          <tr>
-            <td className="label-td" colSpan="2">
-              <input type="number" name="uid" className="input-text" placeholder="ex:1757"  onChange={InputHandler } pattern="[0]{1}[0-9]{9}" value={inputs.uid} />
-            </td>
-          </tr>
-          <tr>
-            <td className="label-td" colSpan="2">
-              <label  className="form-label">NAME: </label>
-            </td>
-          </tr>
-          <tr>
-            <td className="label-td" colSpan="2">
-              <input type="text" name="name" className="input-text" placeholder="DR."  onChange={InputHandler }  value={inputs.name}/>
-            </td>
-          </tr>
-          <tr>
-            <td className="label-td" colSpan="2">
-              <label htmlFor="phn" className="form-label">AGE: </label>
-            </td>
-          </tr>
-          <tr>
-            <td className="label-td" colSpan="2">
-              <input type="number" name="age" className="input-text" placeholder=""  onChange={InputHandler } pattern="[0]{1}[0-9]{9}" value={inputs.age} />
-            </td>
-          </tr>
-          <tr>
-            <td className="label-td" colSpan="2">
-              <label htmlFor="phn" className="form-label">SPECIALTIES: </label>
-            </td>
-          </tr>
-          <tr>
-            <td className="label-td" colSpan="2">
-              <input type="text" name="spec" className="input-text" placeholder=""  onChange={InputHandler } pattern="[0]{1}[0-9]{9}"  value={inputs.spec}/>
-            </td>
-          </tr>
-          <tr>
-            <td className="label-td" colSpan="2">
-              <label  className="form-label">QUALIFICATION: </label>
-            </td>
-          </tr>
-          <tr>
-            <td className="label-td" colSpan="2">
-              <input type="teXT" name="edu" className="input-text" placeholder="MBBS,MD,..."  onChange={InputHandler } pattern="[0]{1}[0-9]{9}" value={inputs.edu}/>
-            </td>
-          </tr>
-          <tr>
-            <td className="label-td" colSpan="2">
-              <label className="form-label">EXPERIENCE: </label>
-            </td>
-          </tr>
-          <tr>
-            <td className="label-td" colSpan="2">
-              <input type="STRING" name="exp" className="input-text" placeholder="in years"  onChange={InputHandler }  value={inputs.exp}/>
-            </td>
-          </tr>
-          <tr>
-            <td className="label-td" colSpan="2">
-              <label className="form-label">LANGUAGE: </label>
-            </td>
-          </tr>
-          <tr>
-            <td className="label-td" colSpan="2">
-              <input type="text" name="lang" className="input-text" placeholder="for communication"  onChange={InputHandler }  value={inputs.lang}/>
-            </td>
-          </tr>
-          <tr>
-            <td className="label-td" colSpan="2">
-              <label className="form-label">LOCATION: </label>
-            </td>
-          </tr>
-          <tr>
-            <td className="label-td" colSpan="2">
-              <input type="url" name="locat" className="input-text" placeholder="google map link"  onChange={InputHandler }  value={inputs.locat}/>
-            </td>
-          </tr>
-          <tr>
-            <td className="label-td" colSpan="2">
-              <label className="form-label">EXPERIENCE: </label>
-            </td>
-          </tr>
-          <tr>
-            <td className="label-td" colSpan="2">
-              <input type="text" name="conslt" className="input-text" placeholder="till now"  onChange={InputHandler }  value={inputs.conslt}/>
-            </td>
-          </tr>
-          <tr>
-<td className="label-td" colSpan="2">
-  <label className="form-label">Consultation Type: </label>
-</td>
-</tr>
-<tr>
-<td className="label-td" colSpan="2">
-  <select name="type" className="input-text" onChange={InputHandler} value={inputs.type}>
-    <option value="online ">online consultation</option>
-    <option value="inclinic">inclinic consultation</option>
-    <option value="Both">Both</option>
-  </select>
-</td>
-</tr>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <center>
+        <Paper elevation={3} style={{ padding: '20px', width: '400px' }}>
+          <Typography variant="h5" align="center">
+            Let's Get Started
+          </Typography>
+          <Typography variant="subtitle1" align="center">
+            It's Okay, Now Create doctor's Account.
+          </Typography>
+          <form>
+          <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  label="NMC UID"
+                  name="uid"
+                  type="number"
+                  placeholder="ex:1757"
+                  onChange={InputHandler}
+                  value={inputs.uid}
+                  margin="normal"
+                  InputProps={{
+                    pattern: '[0]{1}[0-9]{9}',
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  label="Name"
+                  name="name"
+                  placeholder="DR."
+                  onChange={InputHandler}
+                  value={inputs.name}
+                  margin="normal"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  label="Age"
+                  name="age"
+                  type="number"
+                  placeholder=""
+                  onChange={InputHandler}
+                  value={inputs.age}
+                  margin="normal"
+                />
+              </Grid>
+              <Grid item xs={6}>
+                {/* Two text fields in one row */}
+                <TextField
+                  fullWidth
+                  label="Location"
+                  name="locat"
+                  placeholder="Google Map Link"
+                  onChange={InputHandler}
+                  value={inputs.locat}
+                  margin="normal"
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  fullWidth
+                  label="Experience"
+                  name="conslt"
+                  placeholder="till now"
+                  onChange={InputHandler}
+                  value={inputs.conslt}
+                  margin="normal"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  label="Qualification"
+                  name="edu"
+                  placeholder="MBBS, MD, ..."
+                  onChange={InputHandler}
+                  value={inputs.edu}
+                  margin="normal"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  label="Experience"
+                  name="exp"
+                  placeholder="in years"
+                  onChange={InputHandler}
+                  value={inputs.exp}
+                  margin="normal"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  label="Language"
+                  name="lang"
+                  placeholder="for communication"
+                  onChange={InputHandler}
+                  value={inputs.lang}
+                  margin="normal"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  label="Location"
+                  name="locat"
+                  placeholder="Google Map Link"
+                  onChange={InputHandler}
+                  value={inputs.locat}
+                  margin="normal"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  label="Experience"
+                  name="conslt"
+                  placeholder="till now"
+                  onChange={InputHandler}
+                  value={inputs.conslt}
+                  margin="normal"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <FormControl fullWidth margin="normal">
+                  <InputLabel>Consultation Type</InputLabel>
+                  <Select
+                    name="type"
+                    value={inputs.type}
+                    onChange={InputHandler}
+                  >
+                    <MenuItem value="online">Online Consultation</MenuItem>
+                    <MenuItem value="inclinic">Inclinic Consultation</MenuItem>
+                    <MenuItem value="Both">Both</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  label="Upload Certificate"
+                  name="cert"
+                  type="file"
+                  onChange={InputHandler}
+                  value={inputs.cert}
+                  margin="normal"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  label="Profile Photo"
+                  name="pic"
+                  type="file"
+                  onChange={InputHandler}
+                  value={inputs.pic}
+                  margin="normal"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextareaAutosize
+                  name="about"
+                  className="input-text"
+                  placeholder="Details about the doctor"
+                  onChange={InputHandler}
+                  value={inputs.about}
+                  style={{ width: '100%', minHeight: '50px', margin: '10px 0' }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  label="Mobile Number"
+                  name="phn"
+                  type="number"
+                  placeholder="ex: 9712345678"
+                  value={inputs.phn}
+                  onChange={InputHandler}
+                  margin="normal"
+                  InputProps={{
+                    pattern: '[0]{1}[0-9]{9}',
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  label="Email"
+                  name="email"
+                  type="email"
+                  placeholder="Email Address"
+                  value={inputs.email}
+                  onChange={InputHandler}
+                  margin="normal"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  label="Create New Password"
+                  name="npass"
+                  type={showPassword ? 'text' : 'password'}
+                  placeholder="New Password"
+                  margin="normal"
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton onClick={handleClickShowPassword}>
+                          {showPassword ? <Visibility /> : <VisibilityOff />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  label="Confirm Password"
+                  name="cpass"
+                  type={showPassword ? 'text' : 'password'}
+                  placeholder="Confirm Password"
+                  value={inputs.cpass}
+                  onChange={InputHandler}
+                  margin="normal"
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton onClick={handleClickShowPassword}>
+                          {showPassword ? <Visibility /> : <VisibilityOff />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+              </Grid>
+            </Grid>
 
-<tr>
-<td className="label-td" colSpan="2">
-  <label  className="form-label">Upload Certificate: </label>
-</td>
-</tr>
-<tr>
-<td className="label-td" colSpan="2">
-  <input type="file" name="cert" className="input-text" onChange={InputHandler} value={inputs.cert} />
-</td>
-</tr>
-
-<tr>
-<td className="label-td" colSpan="2">
-  <label className="form-label">Profile Photo: </label>
-</td>
-</tr>
-<tr>
-<td className="label-td" colSpan="2">
-  <input type="file" name="pic" className="input-text" onChange={InputHandler} value={inputs.pic}/>
-</td>
-</tr>
-<tr>
-<td className="label-td" colSpan="2">
-  <label className="form-label">About You: </label>
-</td>
-</tr>
-<tr>
-<td className="label-td" colSpan="2">
-  <textarea name="about" className="input-text" placeholder="Details about the doctor" onChange={InputHandler} value={inputs.about}></textarea>
-</td>
-</tr>
-<tr>
-            <td className="label-td" colSpan="2">
-              <label className="form-label">Mobile Number: </label>
-            </td>
-          </tr>
-          <tr>
-            <td className="label-td" colSpan="2">
-              <input type="number" name="phn" className="input-text" placeholder="ex: 9712345678" value={inputs.phn} onChange={InputHandler } pattern="[0]{1}[0-9]{9}" />
-            </td>
-          </tr>
-          <tr>
-            <td className="label-td" colSpan="2">
-              <label className="form-label" >Email: </label>
-            </td>
-          </tr>
-          <tr>
-            <td className="label-td" colSpan="2">
-              <input type="email" name="email" className="input-text" placeholder="Email Address" value={inputs.email} onChange={InputHandler }  />
-            </td>
-          </tr>
-          <tr>
-            <td className="label-td" colSpan="2">
-              <label  className="form-label">Create New Password: </label>
-            </td>
-          </tr>
-          <tr>
-            <td className="label-td" colSpan="2">
-              <input type="password" name="npass" className="input-text" placeholder="New Password" />
-            </td>
-          </tr>
-          <tr>
-            <td className="label-td" colSpan="2">
-              <label  className="form-label">Confirm Password: </label>
-            </td>
-          </tr>
-          <tr>
-            <td className="label-td" colSpan="2">
-              <input type="password" name="cpass" className="input-text" placeholder="Confirm Password" value={inputs.cpass} onChange={InputHandler }  />
-            </td>
-          </tr>
-          <tr>
-            <td colSpan="2">
-              {/* $error variable replacement */}
-              {Error && <p>{Error}</p>}
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <input type="reset" value="Reset" className="login-btn btn-primary btn" />
-            </td>
-            <td>
-              <input type="submit" value="Sign Up" onClick={SaveData }  className="login-btn btn-primary btn" />
-            </td>
-          </tr>
-          <tr>
-            <td colSpan="2">
-              <br />
-              <label htmlFor="" className="sub-text" style={{ fontWeight: 280 }}>
-                Already have an account?
-                <a href="Login" className="hover-link1 non-style-link">
-                  Login
-                </a>
-              </label>
-              <br /><br /><br />
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      
-      
-     
-    </div>
-    </center>
- 
-);
+            <Button
+              variant="contained"
+              color="primary"
+              fullWidth
+              onClick={SaveData}
+              style={{ marginTop: '20px' }}
+            >
+              Sign Up
+            </Button>
+          </form>
+        </Paper>
+      </center>
+    </ThemeProvider>
+  );
 }
 
 export default SignUp;

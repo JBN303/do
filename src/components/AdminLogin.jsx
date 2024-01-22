@@ -1,58 +1,104 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import {
+  Button,
+  Container,
+  CssBaseline,
+  TextField,
+  Typography,
+  ThemeProvider,
+  createTheme,
+} from '@mui/material';
+import { styled } from '@mui/system';
+import { Center } from '@mui/system';
 
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#77d5cb',
+    },
+  },
+});
 
-function AdminLogin() {
+const CustomContainer = styled(Container)({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  marginTop: '2rem',
+  backgroundColor: '#fff',
+  padding: '2rem',
+  borderRadius: '8px',
+  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+});
+
+const AdminLogin = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
-  
 
   const handleLogin = () => {
-    if (username === 'jibin johny' && password === 'jbn303') {
+    if (username === 'docere123' && password === 'jbn303') {
       // Redirect to admin dashboard on successful login
       navigate('/admindashboard');
     } else {
-      setErrorMessage('Invalid username or password');
+      setErrorMessage('Invalid Admin username or password');
     }
   };
 
   return (
-    <center>
-    <div className="container">
-    <h2 className="header-text">Admin Login</h2>
-    <form>
-      <div>
-        <label className="form-label">Username:</label>
-        <input
-          className="input-text"
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-      </div>
-      <div>
-        <label className="form-label">Password:</label>
-        <input
-          className="input-text"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </div>
-      <button
-        className="btn login-btn"
-        type="button"
-        onClick={handleLogin}
-      >
-        Login
-      </button>
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
-    </form>
-  </div>
-  </center>
+    <ThemeProvider theme={theme}>
+      <center>
+      <CustomContainer component="main" maxWidth="xs" >
+       
+        <CssBaseline />
+        <Typography variant="h5" color="textPrimary">
+          Admin Login
+        </Typography>
+        <form>
+          <TextField
+            label="Username"
+            variant="outlined"
+            margin="normal"
+            fullWidth
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            InputProps={{
+              style: { backgroundColor: '#fff' },
+            }}
+          />
+          <TextField
+            label="Password"
+            variant="outlined"
+            margin="normal"
+            fullWidth
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            InputProps={{
+              style: { backgroundColor: '#fff' },
+            }}
+          />
+          <Button
+            variant="contained"
+            color="primary"
+            fullWidth
+            onClick={handleLogin}
+            sx={{ marginTop: '1rem' }}
+          >
+            Login
+          </Button>
+          {errorMessage && (
+            <Typography color="error" sx={{ marginTop: '1rem' }}>
+              {errorMessage}
+            </Typography>
+          )}
+        </form>
+        
+      </CustomContainer>
+      </center>
+    </ThemeProvider>
   );
-}
+};
 
 export default AdminLogin;

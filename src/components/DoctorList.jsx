@@ -1,8 +1,18 @@
-// DoctorList.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-import './doctorslist.css';
+import Paper from '@mui/material/Paper';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Button from '@mui/material/Button';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import ToggleOnOutlinedIcon from '@mui/icons-material/ToggleOnOutlined';
+import logo from '../img/docere.png'
 
 const DoctorList = () => {
   const [doctors, setDoctors] = useState([]);
@@ -17,6 +27,7 @@ const DoctorList = () => {
       console.error(error);
     }
   };
+
   useEffect(() => {
     // Fetch data from the backend when the component mounts
     axios.get('http://localhost:5007/api/doctors')
@@ -25,66 +36,75 @@ const DoctorList = () => {
   }, []);
 
   return (
+    <AppBar position="static" sx={{ backgroundColor: '#77d5cb' }}>
     <div>
-    <h2>Registered Doctors</h2>
-    <table border="1">
-      <thead>
-        <tr>
-          <th>status</th>
-          <th>NMC UID</th>
-          <th>Name</th>
-          <th>Age</th>
-          <th>Specialty</th>
-          <th>Qualification</th>
-          
-          <th>Language</th>
-          <th>Location</th>
-          <th>Experience</th>
-          <th>Consultation Type</th>
-          <th>cirtificate</th>
-          <th>Profile photo</th>
-          <th>About </th>
-          <th>Mobile numer</th>
-          <th>Email</th>
-          <th>password</th>
-          <th></th>
-          
-          {/* Add more columns as needed */}
-        </tr>
-      </thead>
-      <tbody>
-        {doctors.map(doctor => (
-          <tr key={doctor._id}>
-            <td>
-              {doctor.status === 'active' ? 'Active' : 'Inactive'}
-              </td>
-            <td>{doctor.uid}</td>
-            <td>{doctor.name}</td>
-            <td>{doctor.age}</td>
-            <td>{doctor.spec}</td>
-            <td>{doctor.edu}</td>
-            <td>{doctor.lang}</td>
-            <td>{doctor.locat}</td>
-            <td>{doctor.conslt}</td>
-            <td>{doctor.type}</td>
-            <td>{doctor.cert}</td>
-            <td>{doctor.pic}</td>
-            <td>{doctor.about}</td>
-            <td>{doctor.phn}</td>
-            <td>{doctor.email}</td>
-            <td>{doctor.cpass}</td>
-            
-              <td>
-              <button className="login-btn btn-primary btn" onClick={() => toggleStatus(doctor._id)}>change Status</button>
-            </td>
-            
-            
-            
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
+      
+        <Toolbar>
+        <img src={logo} alt="Logo" style={{ width: '170px', height: '100px' }} />
+          <Typography variant="h6" component="div">
+            Doctor List
+          </Typography>
+        </Toolbar>
+      
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }} aria-label="doctor table">
+          <TableHead>
+            <TableRow>
+              <TableCell style={{ fontWeight: 'bold' }}>Status</TableCell>
+              <TableCell style={{ fontWeight: 'bold' }}>NMC UID</TableCell>
+              <TableCell style={{ fontWeight: 'bold' }}>Name</TableCell>
+              <TableCell style={{ fontWeight: 'bold' }}>Age</TableCell>
+              <TableCell style={{ fontWeight: 'bold' }}>Specialty</TableCell>
+              <TableCell style={{ fontWeight: 'bold' }}>Qualification</TableCell>
+              <TableCell style={{ fontWeight: 'bold' }}>Language</TableCell>
+              <TableCell style={{ fontWeight: 'bold' }}>Location</TableCell>
+              <TableCell style={{ fontWeight: 'bold' }}>Experience</TableCell>
+              <TableCell style={{ fontWeight: 'bold' }}>Consultation Type</TableCell>
+              <TableCell style={{ fontWeight: 'bold' }}>Certificate</TableCell>
+              <TableCell style={{ fontWeight: 'bold' }}>Profile Photo</TableCell>
+              <TableCell style={{ fontWeight: 'bold' }}>About</TableCell>
+              <TableCell style={{ fontWeight: 'bold' }}>Mobile Number</TableCell>
+              <TableCell style={{ fontWeight: 'bold' }}>Email</TableCell>
+              <TableCell style={{ fontWeight: 'bold' }}> Password</TableCell>
+              <TableCell style={{ fontWeight: 'bold' }}> Action</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {doctors.map(doctor => (
+              <TableRow key={doctor._id}>
+                <TableCell style={{ fontWeight: 'bold' }}>{doctor.status === 'active' ? 'Active' : 'Inactive'}</TableCell>
+                <TableCell>{doctor.uid}</TableCell>
+                <TableCell>{doctor.name}</TableCell>
+                <TableCell>{doctor.age}</TableCell>
+                <TableCell>{doctor.spec}</TableCell>
+                <TableCell>{doctor.edu}</TableCell>
+                <TableCell>{doctor.lang}</TableCell>
+                <TableCell>{doctor.locat}</TableCell>
+                <TableCell>{doctor.conslt}</TableCell>
+                <TableCell>{doctor.type}</TableCell>
+                <TableCell>{doctor.cert}</TableCell>
+                <TableCell>{doctor.pic}</TableCell>
+                <TableCell>{doctor.about}</TableCell>
+                <TableCell>{doctor.phn}</TableCell>
+                <TableCell>{doctor.email}</TableCell>
+                <TableCell>{doctor.cpass}</TableCell>
+                <TableCell>
+                <Button
+                    
+                    
+                    startIcon={<ToggleOnOutlinedIcon />} style={{ color: '#77d5cb' }}
+                    onClick={() => toggleStatus(doctor._id)}
+                  >
+                    
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </div>
+    </AppBar>
   );
 };
 
